@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 
 import java.io.File;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,11 +20,13 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    private int userId;
     private int likes;
     private File image;
 
-    @OneToMany()
-    @JoinColumn()
-    private Comment[] comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private int userId;
+
+    @OneToMany(mappedBy = "postId")
+    private List<Comment> comments;
 }

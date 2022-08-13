@@ -17,10 +17,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @ManyToOne()
-    @JoinColumn()
-    private int userId;
-    private int postId;
-
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private int userId;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    private int postId;
 }

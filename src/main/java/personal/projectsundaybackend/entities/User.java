@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import javax.persistence.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,9 +23,11 @@ public class User {
     private String email;
     private String password;
 
-    enum role {ADMIN, USER};
+    enum role {USER, ADMIN};
 
-    @OneToMany()
-    @JoinColumn()
-    private Post[] posts;
+    @OneToMany(mappedBy = "userId")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "userId")
+    private List<Comment> comments;
 }
